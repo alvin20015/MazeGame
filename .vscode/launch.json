@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "MazeGame",
+            "request": "launch",
+            "mainClass": "com.game.MazeGame",
+            "projectName": "MazeGame_eb58b853",
+            "args": [
+                "mazes/valid/reg_5x5.txt"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "args": [
+                "mazes/valid/reg_5x5.txt"
+            ]
+        }
+    ]
+}

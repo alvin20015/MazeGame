@@ -240,11 +240,18 @@ public class MazeGame {
      * @param args 命令行参数
      */
     public static void main(String[] args) {
-        String[] test = {"/reg_5x5.txt"};
+        // String[] test = {"/reg_5x5.txt"};
+        if (args == null || args.length == 0) {
+            System.out.println("请输入迷宫文件地址");
+            Scanner inputScanner = new Scanner(System.in);
+            String fileName = inputScanner.nextLine().toLowerCase().trim();
+            args = new String[]{fileName};
+        }
+
         MazeGame game = new MazeGame();
 
         try {
-            game.loadMaze(test);
+            game.loadMaze(args);
             game.startGame();
         } catch (IllegalArgumentException e) {
             System.err.println("错误: " + e.getMessage());
