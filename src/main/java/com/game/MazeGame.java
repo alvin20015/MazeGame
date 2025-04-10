@@ -84,11 +84,7 @@ public class MazeGame {
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
                     char c = mazeLines.get(y).charAt(x);
-
-                    // 验证迷宫字符有效性
-                    if (c != WALL && c != PATH && c != START && c != EXIT) {
-                        throw new IllegalArgumentException("无效的迷宫字符: " + c);
-                    }
+                    validateMazeChar(c);
 
                     maze[y][x] = c;
 
@@ -125,6 +121,16 @@ public class MazeGame {
         }
     }
 
+    /**
+     * 验证迷宫字符有效性
+     * @param c 字符
+     */
+    private void validateMazeChar(char c) {
+        if (c != WALL && c != PATH && c != START && c != EXIT) {
+            throw new IllegalArgumentException("无效的迷宫字符: " + c);
+        }
+    }
+    
    /**
      * 处理用户输入控制玩家移动
      * @return true表示游戏继续，false表示退出游戏
@@ -243,9 +249,10 @@ public class MazeGame {
         // String[] test = {"/reg_5x5.txt"};
         if (args == null || args.length == 0) {
             System.out.println("请输入迷宫文件地址");
-            Scanner inputScanner = new Scanner(System.in);
-            String fileName = inputScanner.nextLine().toLowerCase().trim();
-            args = new String[]{fileName};
+            try (Scanner inputScanner = new Scanner(System.in)) {
+                String fileName = inputScanner.nextLine().toLowerCase().trim();
+                args = new String[]{fileName};
+            }
         }
 
         MazeGame game = new MazeGame();
